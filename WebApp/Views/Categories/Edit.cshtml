@@ -1,5 +1,8 @@
 ﻿@model Category
 
 @section title {
-    <h3>Category: @Model.CategoryId</h3>
+    @if (Model != null)
+    {
+        <h3>Category: @Model.Name</h3>
+    }    
 }
