@@ -1,0 +1,38 @@
+﻿@model Category
+
+@section title {    
+   <h3>Add Category</h3>    
+}
+
+<form method="post" asp-controller="categories" asp-action="add">    
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="row mb-3">
+        <div class="col-2">
+            <label asp-for="Name" class="col-form-label"></label>
+        </div>
+        <div class="col-6">
+            <input type="text" asp-for="Name" class="form-control" />
+        </div>
+        <div class="col">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-2">
+            <label asp-for="Description" class="col-form-label"></label>
+        </div>
+        <div class="col-6">
+            <input type="text" asp-for="Description" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-2">
+            <input type="submit" class="btn btn-primary" value="Add" />
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+
+</form> 
