@@ -13,10 +13,11 @@ namespace WebApp.Models
         [Required]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
+        [Required]        
         public int? Quantity { get; set; }
 
         [Required]
+        [Range(0, int.MaxValue)]
         public double? Price { get; set; }
         
     }
