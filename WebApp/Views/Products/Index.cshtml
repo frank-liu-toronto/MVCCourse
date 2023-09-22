@@ -12,7 +12,8 @@
                 <th>Category Name</th>
                 <th>Product Name</th>
                 <th>Price</th>
-                <th>Quantity</th>                
+                <th>Quantity</th>      
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@
                     <td>@product.Name</td>
                     <td>@product.Price?.ToString("c")</td>
                     <td>@product.Quantity</td>
+                    <td><a class="btn btn-link" asp-controller="products" asp-action="edit" asp-route-id="@product.ProductId">Edit</a></td>
                 </tr>
             }
         </tbody>
