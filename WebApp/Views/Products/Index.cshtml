@@ -14,6 +14,7 @@
                 <th>Price</th>
                 <th>Quantity</th>      
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -25,10 +26,20 @@
                     <td>@product.Price?.ToString("c")</td>
                     <td>@product.Quantity</td>
                     <td><a class="btn btn-link" asp-controller="products" asp-action="edit" asp-route-id="@product.ProductId">Edit</a></td>
+                    <td><a class="btn btn-link" asp-controller="products" asp-action="delete" asp-route-id="@product.ProductId" onclick="return confirmDelete()">Delete</a></td>
                 </tr>
             }
         </tbody>
-    </table>
-    <br />
-    <a class="btn btn-primary" asp-controller="products" asp-action="add">Add</a>
+    </table>    
+}
+
+<br />
+<a class="btn btn-primary" asp-controller="products" asp-action="add">Add</a>
+
+@section Scripts{
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this product?");
+        }
+    </script>
 }
