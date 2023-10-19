@@ -46,7 +46,14 @@
             // Handle category selection
             $("#SelectedCategoryId").on("change", function () {
                 $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: $(this).val() });
-            })
+            });
+
+            $("#productsPartial").on('click', '.product-row', function () {
+
+                // Highlight the row selected
+                $('.product-row').removeClass('highlight');
+                $(this).addClass('highlight');
+            });
 
         });
     </script>    
