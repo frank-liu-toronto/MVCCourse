@@ -14,5 +14,11 @@ namespace WebApp.Controllers
             };
             return View(salesViewModel);
         }
+
+        public IActionResult SellProductPartial(int productId)
+        {
+            var product = ProductsRepository.GetProductById(productId);
+            return PartialView("_SellProduct", product);
+        }
     }
 }

@@ -29,7 +29,7 @@
             @* Product List *@
         </div>
         <br />
-        <div>
+        <div id="productDetailPartial">
             @* Product Details *@
         </div>
         @* Sales form *@
@@ -46,6 +46,7 @@
             // Handle category selection
             $("#SelectedCategoryId").on("change", function () {
                 $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: $(this).val() });
+                $("#productDetailPartial").html("");
             });
 
             $("#productsPartial").on('click', '.product-row', function () {
@@ -56,6 +57,9 @@
 
                 // Get the product ID from the "product-id" attribute of the clicked row
                 var productId = $(this).attr('product-id');
+
+                // Load the details of the product in a partial view                
+                $("#productDetailPartial").load("/sales/SellProductPartial", { productId: productId});
                 
             });
 
