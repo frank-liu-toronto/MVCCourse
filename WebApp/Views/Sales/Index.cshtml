@@ -13,6 +13,7 @@
 <br />
 <div class="row">
     <div class="col-4">
+        <div class="text-danger" asp-validation-summary="All"></div>
         @* Category selection *@
         <select asp-for="SelectedCategoryId" class="form-control">
             <option>- Please Select -</option>
@@ -58,11 +59,15 @@
             $("#formSale").hide();
             $("#QuantityToSell").val("");
 
+            // Load the products if category is already selected
+            var selectedCategoryId = $("#SelectedCategoryId").val();
+            if (selectedCategoryId > 0) {
+                loadProducts(selectedCategoryId);
+            }
+
             // Handle category selection
             $("#SelectedCategoryId").on("change", function () {
-                $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: $(this).val() });
-                $("#productDetailPartial").html("");
-                $("#formSale").hide();
+                loadProducts($(this).val())
             });
 
             $("#productsPartial").on('click', '.product-row', function () {
@@ -88,5 +93,11 @@
             });
 
         });
+
+        function loadProducts(categoryId) {
+            $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: categoryId });
+            $("#productDetailPartial").html("");
+            $("#formSale").hide();
+        }
     </script>    
 }
