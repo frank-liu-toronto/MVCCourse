@@ -5,72 +5,88 @@
     <h3>Transactions Report</h3>
 }
 
-<form method="post" asp-controller="transactions" asp-action="search" id="transactions">
-    <div class="row">
-        <div class="col-2">
-            <label asp-for="CashierName"></label>
-            <input type="text" class="form-control" asp-for="CashierName" />
+<div id="printarea">
+    <form method="post" asp-controller="transactions" asp-action="search" id="transactions">
+        <div class="row">
+            <div class="col-2">
+                <label asp-for="CashierName"></label>
+                <input type="text" class="form-control" asp-for="CashierName" />
+            </div>
+            <div class="col-3">
+                <label asp-for="StartDate"></label>
+                <input type="date" class="form-control" asp-for="StartDate" />
+            </div>
+            <div class="col-3">
+                <label asp-for="EndDate"></label>
+                <input type="date" class="form-control" asp-for="EndDate" />
+            </div>
+            <div class="col-2">
+                <label>&nbsp;</label>
+                <button type="submit" class="btn btn-primary form-control">Search</button>
+            </div>
+            <div class="col-2">
+                <label>&nbsp;</label>
+                <button id="print" type="button" class="btn btn-primary form-control">Print</button>
+            </div>
         </div>
-        <div class="col-3">
-            <label asp-for="StartDate"></label>
-            <input type="date" class="form-control" asp-for="StartDate" />
-        </div>
-        <div class="col-3">
-            <label asp-for="EndDate"></label>
-            <input type="date" class="form-control" asp-for="EndDate" />
-        </div>
-        <div class="col-2">
-            <label>&nbsp;</label>
-            <button type="submit" class="btn btn-primary form-control">Search</button>
-        </div>
-        <div class="col-2">
-            
-        </div>
-    </div>
-</form>
-<br/>
-@if (Model.Transactions != null)
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date Time</th>
-                <th>Cashier Name</th>
-                <th>Product Name</th>
-                <th>Qty Before</th>
-                <th>Qty Sold</th>
-                <th>Qty After</th>
-                <th>Price</th>
-                <th>Sold Amt</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var tran in Model.Transactions)
-            {
+    </form>
+    <br/>
+    @if (Model.Transactions != null)
+    {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@tran.TimeStamp.ToString("yyyy-MM-dd hh:mm")</td>
-                    <td>@tran.CashierName</td>
-                    <td>@tran.ProductName</td>
-                    <td>@tran.BeforeQty</td>
-                    <td>@tran.SoldQty</td>
-                    <td>@(tran.BeforeQty - tran.SoldQty)</td>
-                    <td style="text-align:right">@(string.Format("{0:c}", tran.Price))</td>
-                    <td style="text-align:right">@(string.Format("{0:c}", tran.SoldQty * tran.Price))</td>
+                    <th>Date Time</th>
+                    <th>Cashier Name</th>
+                    <th>Product Name</th>
+                    <th>Qty Before</th>
+                    <th>Qty Sold</th>
+                    <th>Qty After</th>
+                    <th>Price</th>
+                    <th>Sold Amt</th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6">&nbsp;</td>
-                <td style="text-align:right">
-                    <b>Grand Total:</b>
-                </td>
-                <td style="text-align:right">
-                    <b>
-                        @(string.Format("{0:c}", Model.Transactions.Sum(x => x.Price * x.SoldQty)))
-                    </b>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var tran in Model.Transactions)
+                {
+                    <tr>
+                        <td>@tran.TimeStamp.ToString("yyyy-MM-dd hh:mm")</td>
+                        <td>@tran.CashierName</td>
+                        <td>@tran.ProductName</td>
+                        <td>@tran.BeforeQty</td>
+                        <td>@tran.SoldQty</td>
+                        <td>@(tran.BeforeQty - tran.SoldQty)</td>
+                        <td style="text-align:right">@(string.Format("{0:c}", tran.Price))</td>
+                        <td style="text-align:right">@(string.Format("{0:c}", tran.SoldQty * tran.Price))</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">&nbsp;</td>
+                    <td style="text-align:right">
+                        <b>Grand Total:</b>
+                    </td>
+                    <td style="text-align:right">
+                        <b>
+                            @(string.Format("{0:c}", Model.Transactions.Sum(x => x.Price * x.SoldQty)))
+                        </b>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            // Handle print
+            $('#print').on('click', function () {
+                window.print();
+            });
+
+        });
+    </script>
 }
