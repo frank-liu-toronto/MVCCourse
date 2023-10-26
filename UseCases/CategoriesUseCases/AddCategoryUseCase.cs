@@ -8,18 +8,18 @@ using UseCases.DataStorePluginInterfaces;
 
 namespace UseCases.CategoriesUseCases
 {
-    public class ViewSelectedCategoryUseCase
+    public class AddCategoryUseCase
     {
         private readonly ICategoryRepository categoryRepository;
 
-        public ViewSelectedCategoryUseCase(ICategoryRepository categoryRepository)
+        public AddCategoryUseCase(ICategoryRepository categoryRepository)
         {
             this.categoryRepository = categoryRepository;
         }
 
-        public Category? Execute(int categoryId)
+        public void Execute(Category category)
         {
-            return categoryRepository.GetCategoryById(categoryId);
+            categoryRepository.AddCategory(category);
         }
     }
 }
