@@ -8,7 +8,7 @@ using UseCases.DataStorePluginInterfaces;
 
 namespace UseCases.CategoriesUseCases
 {
-    public class EditCategoryUseCase
+    public class EditCategoryUseCase : IEditCategoryUseCase
     {
         private readonly ICategoryRepository categoryRepository;
 
