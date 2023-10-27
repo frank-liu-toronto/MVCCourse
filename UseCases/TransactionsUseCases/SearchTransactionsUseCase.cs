@@ -8,11 +8,11 @@ using UseCases.DataStorePluginInterfaces;
 
 namespace UseCases
 {
-    public class GetTransactionsUseCase : IGetTransactionsUseCase
+    public class SearchTransactionsUseCase : ISearchTransactionsUseCase
     {
         private readonly ITransactionRepository transactionRepository;
 
-        public GetTransactionsUseCase(ITransactionRepository transactionRepository)
+        public SearchTransactionsUseCase(ITransactionRepository transactionRepository)
         {
             this.transactionRepository = transactionRepository;
         }

@@ -17,9 +17,9 @@ namespace UseCases
             this.productRepository = productRepository;
         }
 
-        public IEnumerable<Product> Execute(int categoryId)
+        public Product? Execute(int productId)
         {
-            return productRepository.GetProductsByCategoryId(categoryId);
+            return productRepository.GetProductById(productId);
         }
     }
 }

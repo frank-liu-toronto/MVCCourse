@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebApp.Models;
+using UseCases;
 
 namespace WebApp.ViewModels.Validations
 {
@@ -17,16 +17,21 @@ namespace WebApp.ViewModels.Validations
                 }
                 else
                 {
-                    var product = ProductsRepository.GetProductById(salesViewModel.SelectedProductId);
-                    if (product != null)
+                    var getProductByIdUseCase = validationContext.GetService(typeof(IViewSelectedProductUseCase)) as IViewSelectedProductUseCase;
+
+                    if (getProductByIdUseCase != null)
                     {
-                        if (product.Quantity < salesViewModel.QuantityToSell)
-                            return new ValidationResult($"{product.Name} only has {product.Quantity} left. It is not enough.");
-                    }
-                    else
-                    {
-                        return new ValidationResult("The selected product doesn't exist.");
-                    }
+                        var product = getProductByIdUseCase.Execute(salesViewModel.SelectedProductId);
+                        if (product != null)
+                        {
+                            if (product.Quantity < salesViewModel.QuantityToSell)
+                                return new ValidationResult($"{product.Name} only has {product.Quantity} left. It is not enough.");
+                        }
+                        else
+                        {
+                            return new ValidationResult("The selected product doesn't exist.");
+                        }
+                    }                    
                 }
             }
 

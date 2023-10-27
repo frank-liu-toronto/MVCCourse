@@ -6,20 +6,20 @@ using System.Text;
 using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
 
-namespace UseCases
+namespace UseCases.ProductsUseCases
 {
-    public class GetProductByIdUseCase : IGetProductByIdUseCase
+    public class ViewProductsInCategoryUseCase : IViewProductsInCategoryUseCase
     {
         private readonly IProductRepository productRepository;
 
-        public GetProductByIdUseCase(IProductRepository productRepository)
+        public ViewProductsInCategoryUseCase(IProductRepository productRepository)
         {
             this.productRepository = productRepository;
         }
 
-        public Product? Execute(int productId)
+        public IEnumerable<Product> Execute(int categoryId)
         {
-            return productRepository.GetProductById(productId);
+            return productRepository.GetProductsByCategoryId(categoryId);
         }
     }
 }
