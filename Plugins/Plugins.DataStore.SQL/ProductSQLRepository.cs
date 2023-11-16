@@ -65,9 +65,9 @@ namespace Plugins.DataStore.SQL
             if (prod == null) return;
 
             prod.CategoryId = product.CategoryId;
-            prod.Name = prod.Name;
-            prod.Price = prod.Price;
-            prod.Quantity = prod.Quantity;
+            prod.Name = product.Name;
+            prod.Price = product.Price;
+            prod.Quantity = product.Quantity;
 
             db.SaveChanges();
         }

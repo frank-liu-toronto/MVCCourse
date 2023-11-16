@@ -17,9 +17,19 @@ builder.Services.AddDbContext<MarketContext>(options =>
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<ICategoryRepository, CategoriesInMemoryRepository>();
-builder.Services.AddSingleton<IProductRepository, ProductsInMemoryRepository>();
-builder.Services.AddSingleton<ITransactionRepository, TransactionsInMemoryRepository>();
+if (builder.Environment.IsEnvironment("QA"))
+{
+    builder.Services.AddSingleton<ICategoryRepository, CategoriesInMemoryRepository>();
+    builder.Services.AddSingleton<IProductRepository, ProductsInMemoryRepository>();
+    builder.Services.AddSingleton<ITransactionRepository, TransactionsInMemoryRepository>();
+}
+else
+{
+    builder.Services.AddTransient<ICategoryRepository, CategorySQLRepository>();
+    builder.Services.AddTransient<IProductRepository, ProductSQLRepository>();
+    builder.Services.AddTransient<ITransactionRepository, TransactionSQLRepository>();
+}
+
 
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
 builder.Services.AddTransient<IViewSelectedCategoryUseCase, ViewSelectedCategoryUseCase>();
