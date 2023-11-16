@@ -12,6 +12,11 @@ using WebApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<AccountContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MarketManagement"));
+});
+
 builder.Services.AddDbContext<MarketContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MarketManagement"));
