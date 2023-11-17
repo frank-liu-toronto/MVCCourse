@@ -3,9 +3,11 @@ using CoreBusiness;
 using WebApp.ViewModels;
 using UseCases.CategoriesUseCases;
 using UseCases;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class SalesController : Controller
     {
         private readonly IViewCategoriesUseCase viewCategoriesUseCase;
