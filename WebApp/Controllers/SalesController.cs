@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Cashiers")]
     public class SalesController : Controller
     {
         private readonly IViewCategoriesUseCase viewCategoriesUseCase;
