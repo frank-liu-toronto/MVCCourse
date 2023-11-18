@@ -4,6 +4,7 @@ using WebApp.ViewModels;
 using UseCases.CategoriesUseCases;
 using UseCases;
 using Microsoft.AspNetCore.Authorization;
+using UseCases.ProductsUseCases;
 
 namespace WebApp.Controllers
 {
@@ -12,15 +13,18 @@ namespace WebApp.Controllers
     {
         private readonly IViewCategoriesUseCase viewCategoriesUseCase;
         private readonly IViewSelectedProductUseCase viewSelectedProductUseCase;
-        private readonly ISellProductUseCase sellProductUseCase;        
+        private readonly ISellProductUseCase sellProductUseCase;
+        private readonly IViewProductsInCategoryUseCase viewProductsInCategoryUseCase;
 
         public SalesController(IViewCategoriesUseCase viewCategoriesUseCase,
             IViewSelectedProductUseCase viewSelectedProductUseCase,
-            ISellProductUseCase sellProductUseCase)
+            ISellProductUseCase sellProductUseCase,
+            IViewProductsInCategoryUseCase viewProductsInCategoryUseCase)
         {
             this.viewCategoriesUseCase = viewCategoriesUseCase;
             this.viewSelectedProductUseCase = viewSelectedProductUseCase;
-            this.sellProductUseCase = sellProductUseCase;            
+            this.sellProductUseCase = sellProductUseCase;
+            this.viewProductsInCategoryUseCase = viewProductsInCategoryUseCase;
         }
 
         public IActionResult Index()
@@ -54,6 +58,13 @@ namespace WebApp.Controllers
             salesViewModel.Categories = viewCategoriesUseCase.Execute();
             
             return View("Index", salesViewModel);
+        }
+
+        public IActionResult ProductsByCategoryPartial(int categoryId)
+        {
+            var products = viewProductsInCategoryUseCase.Execute(categoryId);
+
+            return PartialView("_Products", products);
         }
     }
 }

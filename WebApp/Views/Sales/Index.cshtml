@@ -98,7 +98,7 @@
         });
 
         function loadProducts(categoryId) {
-            $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: categoryId });
+            $("#productsPartial").load("/sales/ProductsByCategoryPartial", { categoryId: categoryId });
             $("#productDetailPartial").html("");
             $("#formSale").hide();
         }
