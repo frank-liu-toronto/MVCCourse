@@ -34,13 +34,15 @@
                             <a class="nav-link text-dark" asp-controller="transactions" asp-action="index">Transactions</a>
                         </li>
                     </ul>
+
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
         <div class="pb-3">
-            @RenderSection("title")
+            @RenderSection("title", false)
             <hr />
         </div>
         <div>

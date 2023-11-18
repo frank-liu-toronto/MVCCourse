@@ -6,7 +6,7 @@ namespace Plugins.DataStore.SQL
 {
     public class MarketContext : DbContext
     {
-        public MarketContext(DbContextOptions options) : base(options)
+        public MarketContext(DbContextOptions<MarketContext> options) : base(options)
         {
         }
 
